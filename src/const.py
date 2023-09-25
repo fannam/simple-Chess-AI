@@ -5,4 +5,4 @@ HEIGHT =800
 #Board dimension
 COLS = 8
 ROWS = 8
-SQSZIE = WIDTH // COLS
+SQSIZE = WIDTH // COLS
