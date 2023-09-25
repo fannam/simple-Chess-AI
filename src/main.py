@@ -22,6 +22,9 @@ class Main:
         while True:
             game.show_bg(screen)
             game.show_pieces(screen)
+
+            if dragger.dragging:
+                dragger.update_blit(screen)
             
             for event in pygame.event.get():
 
@@ -36,13 +39,23 @@ class Main:
 
                     if board.squares[clicked_row][clicked_col].has_piece():
                         piece = board.squares[clicked_row][clicked_col].piece
+                        dragger.save_initial(event.pos) #to save the square for illegal move
+                        dragger.drag_piece(piece)
+
                 #mouse button
                 elif event.type == pygame.MOUSEMOTION:
-                    pass
+
+                    if dragger.dragging:
+                        dragger.update_mouse(event.pos)
+                        game.show_bg(screen)
+                        game.show_pieces(screen)
+                        #game.show_bg and game.show_pieces method make sure that 
+                        #the dragged piece will not have some 'illusion' which is depend on screen's refresh rate
+                        dragger.update_blit(screen)
                 
                 #click release
                 elif event.type == pygame.MOUSEBUTTONUP:
-                    pass
+                    dragger.undrag_piece()
 
                 #quit
                 elif event.type == pygame.QUIT:
