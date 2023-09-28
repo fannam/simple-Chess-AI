@@ -6,9 +6,33 @@ class Board:
 
     def __init__(self):
         self.squares = [[0, 0, 0, 0, 0, 0, 0, 0] for col in range(COLS)]
+        self.last_move = None
         self._create()
         self._add_pieces('white')
         self._add_pieces('black')
+
+    def move(self, piece, move):
+        initial = move.initial
+        final = move.final
+
+        #display on board
+        self.squares[initial.row][initial.col].piece = None 
+        #we want to display the board after we made a move
+        #so the initial square is none
+        self.squares[final.row][final.col].piece = piece
+        #and the final square is that piece 
+
+        #move
+        piece.moved = True
+
+        #clear old valid moves
+        piece.clear_moves(move)
+
+        #set last move
+        self.last_move = move
+
+    def valid_move(self, piece, move):
+        return move in piece.moves
 
     def calc_moves(self, piece, row, col):
         #calculate all valid moves of a specific piece

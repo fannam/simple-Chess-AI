@@ -24,6 +24,9 @@ class Piece:
     def add_move(self, move):
         self.moves.append(move) #append = push_back in a list
 
+    def clear_moves(self, move):
+        self.moves = []
+        
 class Pawn(Piece): #inherit from Piece
 
     def __init__(self, color):
