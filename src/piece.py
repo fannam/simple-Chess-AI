@@ -33,7 +33,8 @@ class Pawn(Piece): #inherit from Piece
         if color == 'white':
             self.dir = -1 #dir = direction
         else: 
-            self.dir = 1       
+            self.dir = 1      
+        self.en_passant = False 
         super().__init__('pawn', color, 1.0)
 
 class Knight(Piece):
